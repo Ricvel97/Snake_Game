@@ -1,4 +1,3 @@
-from copyreg import add_extension
 from turtle import Turtle
 
 STARTING_POSITION = [(0, 0), (-20, 0), (-40, 0)]
@@ -13,25 +12,11 @@ class Snake:
         self.create_snake()
         self.head = self.segments[0]
         self.tail = self.segments[-1]
+        self.move_distance = 20
 
     def create_snake(self):
         for position in STARTING_POSITION:
             self.add_segment(position)
-
-    def reset_snake(self):
-        for segment in self.segments:
-            segment.goto(1000, 1000)
-        self.segments.clear()
-        self.create_snake()
-
-
-    def end_game(self):
-        for segment in self.segments:
-            segment.goto(1000, 1000)
-        self.segments.clear()
-
-    def start_game(self):
-        self.head = self.segments[0]
 
     def add_segment(self, position):
         new_segment = Turtle(shape="square")
@@ -39,6 +24,18 @@ class Snake:
         new_segment.penup()
         new_segment.goto(position)
         self.segments.append(new_segment)
+
+    def reset_snake(self):
+        for segment in self.segments:
+            segment.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
+    # def end_game(self):
+    #     # for segment in self.segments:
+    #     #     segment.goto(1000, 1000)
+    #     self.segments.clear()
 
     def extension(self):
         self.add_segment(self.tail.pos())
@@ -53,7 +50,7 @@ class Snake:
             new_x = self.segments[segment - 1].xcor()
             new_y = self.segments[segment - 1].ycor()
             self.segments[segment].goto(new_x, new_y)
-        self.head.forward(20)
+        self.head.forward(self.move_distance)
 
     def move_up(self):
         heading = self.head.heading()
