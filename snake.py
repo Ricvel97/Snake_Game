@@ -15,14 +15,22 @@ class Snake:
         self.tail = self.segments[-1]
 
     def create_snake(self):
-        for segment in STARTING_POSITION:
-            self.add_segment(segment)
+        for position in STARTING_POSITION:
+            self.add_segment(position)
 
     def reset_snake(self):
         for segment in self.segments:
             segment.goto(1000, 1000)
         self.segments.clear()
         self.create_snake()
+
+
+    def end_game(self):
+        for segment in self.segments:
+            segment.goto(1000, 1000)
+        self.segments.clear()
+
+    def start_game(self):
         self.head = self.segments[0]
 
     def add_segment(self, position):

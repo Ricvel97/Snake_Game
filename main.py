@@ -15,15 +15,14 @@ snake = Snake()
 food = Food()
 scoreboard = ScoreBoard()
 
-def turn_off():
-    return 
 
 screen.listen()
 screen.onkey(key="Up", fun=snake.move_up)
 screen.onkey(key="Down", fun=snake.move_down)
 screen.onkey(key="Right", fun=snake.move_right)
 screen.onkey(key="Left", fun=snake.move_left)
-screen.onkey(key="q", fun=turn_off)
+screen.onkey(key="q", fun=snake.end_game)
+screen.onkey(key="s", fun=snake.start_game)
 
 game_is_on = True
 while game_is_on:
@@ -55,4 +54,5 @@ while game_is_on:
         if snake.head.distance(segment) < 10:
             scoreboard.reset()
             snake.reset_snake()
+
 screen.exitonclick()
