@@ -34,6 +34,8 @@ while game_is_on:
         food.move()
         scoreboard.add_point()
         snake.extension()
+        snake.change_color()
+        snake.change_shape()
 
 #   Detect collision with wall.
     snake_xcor = snake.head.xcor()

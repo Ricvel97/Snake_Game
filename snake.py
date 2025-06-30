@@ -1,4 +1,5 @@
 from turtle import Turtle
+import random
 
 STARTING_POSITION = [(0, 0), (-20, 0), (-40, 0)]
 UP = 90
@@ -51,6 +52,16 @@ class Snake:
             new_y = self.segments[segment - 1].ycor()
             self.segments[segment].goto(new_x, new_y)
         self.head.forward(self.move_distance)
+
+    def change_color(self):
+        colors = ["yellow", "red", "white", "pink", "purple", "orange", "green", "blue"]
+        for segment in self.segments:
+            segment.color(random.choice(colors))
+
+    def change_shape(self):
+        shapes = ["turtle", "square", "arrow", "circle"]
+        for segment in self.segments:
+            segment.shape(random.choice(shapes))
 
     def move_up(self):
         heading = self.head.heading()
