@@ -15,11 +15,15 @@ snake = Snake()
 food = Food()
 scoreboard = ScoreBoard()
 
+def turn_off():
+    return 
+
 screen.listen()
 screen.onkey(key="Up", fun=snake.move_up)
 screen.onkey(key="Down", fun=snake.move_down)
 screen.onkey(key="Right", fun=snake.move_right)
 screen.onkey(key="Left", fun=snake.move_left)
+screen.onkey(key="q", fun=turn_off)
 
 game_is_on = True
 while game_is_on:
@@ -39,19 +43,16 @@ while game_is_on:
     snake_ycor = snake.head.ycor()
 
     if snake_xcor > 295 or snake_xcor < -295:
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset_snake()
+
     elif snake_ycor > 295 or snake_ycor < -295:
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset_snake()
 
-
-#   Detect collision with tail
+    #   Detect collision with tail
     for segment in snake.segments[1::]:
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            scoreboard.game_over()
-
-
-
+            scoreboard.reset()
+            snake.reset_snake()
 screen.exitonclick()
